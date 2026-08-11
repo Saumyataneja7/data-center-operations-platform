@@ -3,3 +3,5 @@ numpy
 faker
 python-dotenv
 azure-storage-blob
+azure-identity
+azure-storage-blob
