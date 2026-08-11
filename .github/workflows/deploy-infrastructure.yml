@@ -34,13 +34,13 @@ jobs:
       - name: What-if deployment
         run: |
           az deployment group what-if \
-            --resource-group $RESOURCE_GROUP \
+            --resource-group "$RESOURCE_GROUP" \
             --template-file infrastructure/main.bicep \
-            --parameters storagePrefix=dcops
+            --parameters storagePrefix=dcops keyVaultPrefix=dcops-kv
 
       - name: Deploy infrastructure
         run: |
           az deployment group create \
-            --resource-group $RESOURCE_GROUP \
+            --resource-group "$RESOURCE_GROUP" \
             --template-file infrastructure/main.bicep \
-            --parameters storagePrefix=dcops
+            --parameters storagePrefix=dcops keyVaultPrefix=dcops-kv 
