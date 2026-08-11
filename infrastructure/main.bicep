@@ -6,6 +6,9 @@ param storagePrefix string = 'dcops'
 @description('Prefix used for the Azure Key Vault name.')
 param keyVaultPrefix string = 'dcops-kv'
 
+@description('Prefix used for the Azure Databricks workspace name.')
+param databricksPrefix string = 'dcops-dbx'
+
 @description('Azure region for the resources.')
 param location string = resourceGroup().location
 
@@ -87,6 +90,30 @@ resource keyVault 'Microsoft.KeyVault/vaults@2025-05-01' = {
   }
 }
 
+// Azure Databricks Workspace
+
+// ------------------------------------------------------------
+// Azure Databricks Serverless Workspace
+// ------------------------------------------------------------
+
+var databricksWorkspaceName = toLower(
+  '${databricksPrefix}-${uniqueString(resourceGroup().id)}'
+)
+
+resource databricksWorkspace 'Microsoft.Databricks/workspaces@2026-01-01' = {
+  name: databricksWorkspaceName
+  location: location
+
+  sku: {
+    name: 'premium'
+  }
+
+  properties: {
+    computeMode: 'Serverless'
+    publicNetworkAccess: 'Enabled'
+  }
+}
+
 // Outputs
 
 output storageAccountName string = storageAccount.name
@@ -100,3 +127,9 @@ output keyVaultName string = keyVault.name
 output keyVaultId string = keyVault.id
 
 output keyVaultUri string = keyVault.properties.vaultUri
+
+output databricksWorkspaceName string = databricksWorkspace.name
+
+output databricksWorkspaceId string = databricksWorkspace.id
+
+output databricksWorkspaceUrl string = databricksWorkspace.properties.workspaceUrl
