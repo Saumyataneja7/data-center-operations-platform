@@ -1,0 +1,46 @@
+name: Deploy Azure Infrastructure
+
+on:
+  workflow_dispatch:
+
+permissions:
+  id-token: write
+  contents: read
+
+env:
+  RESOURCE_GROUP: rg-dc-operations-dev
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Login to Azure
+        uses: azure/login@v2
+        with:
+          client-id: ${{ vars.AZURE_CLIENT_ID }}
+          tenant-id: ${{ vars.AZURE_TENANT_ID }}
+          subscription-id: ${{ vars.AZURE_SUBSCRIPTION_ID }}
+
+      - name: Validate Bicep
+        run: |
+          az bicep build \
+            --file infrastructure/main.bicep
+
+      - name: What-if deployment
+        run: |
+          az deployment group what-if \
+            --resource-group $RESOURCE_GROUP \
+            --template-file infrastructure/main.bicep \
+            --parameters storagePrefix=dcops
+
+      - name: Deploy infrastructure
+        run: |
+          az deployment group create \
+            --resource-group $RESOURCE_GROUP \
+            --template-file infrastructure/main.bicep \
+            --parameters storagePrefix=dcops
