@@ -90,11 +90,7 @@ resource keyVault 'Microsoft.KeyVault/vaults@2025-05-01' = {
   }
 }
 
-// Azure Databricks Workspace
-
-// ------------------------------------------------------------
 // Azure Databricks Serverless Workspace
-// ------------------------------------------------------------
 
 var databricksWorkspaceName = toLower(
   '${databricksPrefix}-${uniqueString(resourceGroup().id)}'
@@ -111,6 +107,43 @@ resource databricksWorkspace 'Microsoft.Databricks/workspaces@2026-01-01' = {
   properties: {
     computeMode: 'Serverless'
     publicNetworkAccess: 'Enabled'
+  }
+}
+
+// Azure Databricks Access Connector
+
+var accessConnectorName = toLower(
+  'dcops-access-${uniqueString(resourceGroup().id)}'
+)
+
+resource databricksAccessConnector 'Microsoft.Databricks/accessConnectors@2026-01-01' = {
+  name: accessConnectorName
+  location: location
+
+  identity: {
+    type: 'SystemAssigned'
+  }
+}
+
+// Grant Access Connector access to ADLS Gen2
+
+resource storageBlobDataContributorRole 'Microsoft.Authorization/roleDefinitions@2022-04-01' existing = {
+  name: 'ba92f5b4-2d11-453d-a403-e96b0029c9fe'
+}
+
+resource accessConnectorStorageRole 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
+  name: guid(
+    storageAccount.id,
+    databricksAccessConnector.id,
+    storageBlobDataContributorRole.id
+  )
+
+  scope: storageAccount
+
+  properties: {
+    roleDefinitionId: storageBlobDataContributorRole.id
+    principalId: databricksAccessConnector.identity.principalId
+    principalType: 'ServicePrincipal'
   }
 }
 
@@ -133,3 +166,7 @@ output databricksWorkspaceName string = databricksWorkspace.name
 output databricksWorkspaceId string = databricksWorkspace.id
 
 output databricksWorkspaceUrl string = databricksWorkspace.properties.workspaceUrl
+
+output accessConnectorId string = databricksAccessConnector.id
+
+output accessConnectorPrincipalId string = databricksAccessConnector.identity.principalId
