@@ -202,32 +202,31 @@ for i in range(RECORDS):
         anomaly = random.choice([
             "OVERHEATING",
             "POWER_SPIKE",
-            "PRESSURE_HIGH",
-            "LOW_VOLTAGE",
-            "HIGH_VIBRATION"
+            "COOLING_SYSTEM_LEAK",
+            "OPERATIONAL_FAULT"
         ])
 
         if anomaly == "OVERHEATING":
 
-            temp = round(random.uniform(38, 48), 2)
+            temp = round(random.uniform(98,115),2)
 
-            vib = round(random.uniform(5, 8), 2)
+            vib = round(random.uniform(8.5,11),2)
 
-            pressure = round(random.uniform(2.5, 3.2), 2)
+            pressure = round(random.uniform(105,135),2)
 
-            voltage = round(random.uniform(225, 235), 2)
+            voltage = round(random.uniform(265,285),2)
 
-            current = round(random.uniform(35, 50), 2)
+            current = round(random.uniform(45,60),2)
 
-            power = round(random.uniform(350, 500), 2)
+            power = round(random.uniform(430,520),2)
 
-            humidity = round(random.uniform(45, 60), 2)
+            humidity = round(random.uniform(45,60),2)
 
-            downtime = random.randint(20, 90)
+            downtime = random.randint(30,90)
 
-            warn = "Critical"
+            warn="Critical"
 
-            err = "OVERHEATING"
+            err="OVERHEATING"
 
         elif anomaly == "POWER_SPIKE":
 
@@ -235,9 +234,9 @@ for i in range(RECORDS):
 
             vib = round(random.uniform(1.0, 2.5), 2)
 
-            pressure = round(random.uniform(2.0, 2.5), 2)
+            pressure = round(random.uniform(100, 125), 2)
 
-            voltage = round(random.uniform(245, 255), 2)
+            voltage = round(random.uniform(265, 290), 2)
 
             current = round(random.uniform(45, 60), 2)
 
@@ -249,65 +248,49 @@ for i in range(RECORDS):
 
             err = "POWER_SPIKE"
 
-        elif anomaly == "PRESSURE_HIGH":
+        elif anomaly == "COOLING_SYSTEM_LEAK":
 
-            temp = round(random.uniform(28, 32), 2)
+            temp = round(random.uniform(82,94),2)
 
-            vib = round(random.uniform(1.0, 2.5), 2)
+            vib = round(random.uniform(1.5,3),2)
 
-            pressure = round(random.uniform(4.2, 5.5), 2)
+            pressure = round(random.uniform(45,60),2)
 
-            voltage = round(random.uniform(225, 235), 2)
+            voltage = round(random.uniform(225,235),2)
 
-            current = round(random.uniform(20, 30), 2)
+            current = round(random.uniform(20,30),2)
 
-            power = round(random.uniform(180, 260), 2)
+            power = round(random.uniform(250,360),2)
 
-            humidity = round(random.uniform(45, 60), 2)
+            humidity = round(random.uniform(45,60),2)
 
-            warn = "Medium"
-
-            err = "PRESSURE_HIGH"
-
-        elif anomaly == "LOW_VOLTAGE":
-
-            temp = round(random.uniform(25, 30), 2)
-
-            vib = round(random.uniform(0.5, 2.0), 2)
-
-            pressure = round(random.uniform(2.0, 2.5), 2)
-
-            voltage = round(random.uniform(180, 205), 2)
-
-            current = round(random.uniform(15, 25), 2)
-
-            power = round(random.uniform(150, 250), 2)
-
-            humidity = round(random.uniform(40, 55), 2)
-
-            warn = "Medium"
-
-            err = "LOW_VOLTAGE"
-
-        else:
-
-            temp = round(random.uniform(28, 34), 2)
-
-            vib = round(random.uniform(6, 10), 2)
-
-            pressure = round(random.uniform(2.0, 2.8), 2)
-
-            voltage = round(random.uniform(225, 235), 2)
-
-            current = round(random.uniform(18, 28), 2)
-
-            power = round(random.uniform(180, 260), 2)
-
-            humidity = round(random.uniform(40, 55), 2)
+            downtime = random.randint(20,60)
 
             warn = "High"
 
-            err = "HIGH_VIBRATION"
+            err = "COOLING_LEAK"
+
+        elif anomaly == "OPERATIONAL_FAULT":
+
+            temp = round(random.uniform(80,88),2)
+
+            vib = round(random.uniform(8,10),2)
+
+            pressure = round(random.uniform(95,120),2)
+
+            voltage = round(random.uniform(225,235),2)
+
+            current = round(random.uniform(20,35),2)
+
+            power = round(random.uniform(430,500),2)
+
+            humidity = round(random.uniform(45,60),2)
+
+            downtime = random.randint(40,120)
+
+            warn="High"
+
+            err="OPERATIONAL_FAULT"
 
     else:
 
@@ -315,7 +298,7 @@ for i in range(RECORDS):
 
         vib = round(random.uniform(0.2, 2.0), 2)
 
-        pressure = round(random.uniform(2.0, 2.8), 2)
+        pressure = round(random.uniform(95, 130), 2)
 
         voltage = round(random.uniform(225, 235), 2)
 
