@@ -145,7 +145,11 @@ for i in range(RECORDS):
 
     ts = start + timedelta(seconds=random.randint(0, seconds))
 
-    status = random.choice(STATUSES)
+    status = random.choices(
+        population=["Running", "Idle", "Stopped", "Maintenance"],
+        weights=[90, 6, 3, 1],
+        k=1
+    )[0]
 
     # Machine Operating State
 
@@ -163,9 +167,9 @@ for i in range(RECORDS):
 
         production = 0
 
-        downtime = random.randint(5, 20)
+        downtime = random.randint(1, 10)
 
-        power = random.uniform(20, 70)
+        power = random.uniform(20, 60)
 
         due = False
 
@@ -173,19 +177,19 @@ for i in range(RECORDS):
 
         production = 0
 
-        downtime = random.randint(20, 90)
+        downtime = random.randint(10, 40)
 
-        power = random.uniform(0, 10)
+        power = random.uniform(0, 8)
 
         due = False
 
-    else:
+    else:  # Maintenance
 
         production = 0
 
-        downtime = random.randint(60, 180)
+        downtime = random.randint(30, 120)
 
-        power = random.uniform(5, 25)
+        power = random.uniform(5, 20)
 
         due = True
 
