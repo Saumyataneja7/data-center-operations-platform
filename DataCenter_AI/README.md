@@ -40,9 +40,13 @@ Create a `.env` file:
 GEMINI_API_KEY=YOUR_API_KEY
 ```
 
-## Screenshots
+# Architecture
 
-(Add screenshots here)
+![Architecture](assets/architecture/solution_architecture.png)
+
+# Power BI Dashboard
+
+![Dashboard](assets/dashboard/executive_dashboard.png)
 
 ## Author
 

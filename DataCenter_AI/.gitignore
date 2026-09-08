@@ -1,28 +1,6 @@
-# Python
 __pycache__/
 *.pyc
-*.pyo
-*.pyd
-
-# Virtual Environment
-venv/
-.venv/
-env/
-
-# Streamlit
-.streamlit/secrets.toml
-
-# Environment variables
 .env
-
-# VS Code
-.vscode/
-
-# Mac
-.DS_Store
-
-# Jupyter
-.ipynb_checkpoints/
-
-# Logs
-*.log
+.venv/
+venv/
+.streamlit/
