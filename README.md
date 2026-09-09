@@ -344,7 +344,7 @@ streamlit run app.py
 
 🔗 **Azure App Service**
 
-> https://YOUR-APP.azurewebsites.net
+> [https://YOUR-APP.azurewebsites.net](https://datacenter-ai-copilot-frazc6czcpfma9ha.centralindia-01.azurewebsites.net/)
 
 ---
 
