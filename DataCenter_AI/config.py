@@ -1,12 +1,23 @@
 from dotenv import load_dotenv
 from pathlib import Path
 import os
+import streamlit as st
 
-# Load .env from the same folder as config.py
-env_path = Path(__file__).parent / ".env"
-load_dotenv(dotenv_path=env_path)
+# Local development: load .env if present.
+load_dotenv(Path(__file__).parent / ".env")
 
-DATABRICKS_SERVER_HOSTNAME = os.getenv("DATABRICKS_SERVER_HOSTNAME")
-DATABRICKS_HTTP_PATH = os.getenv("DATABRICKS_HTTP_PATH")
-DATABRICKS_TOKEN = os.getenv("DATABRICKS_TOKEN")
-GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
+def _secret_or_env(name: str, default=None):
+    try:
+        value = st.secrets.get(name)
+        if value not in (None, ""):
+            return value
+    except Exception:
+        pass
+    return os.getenv(name, default)
+
+DATABRICKS_SERVER_HOSTNAME = _secret_or_env("DATABRICKS_SERVER_HOSTNAME")
+DATABRICKS_HTTP_PATH = _secret_or_env("DATABRICKS_HTTP_PATH")
+DATABRICKS_TOKEN = _secret_or_env("DATABRICKS_TOKEN")
+GEMINI_API_KEY = _secret_or_env("GEMINI_API_KEY")
+
+DEMO_MODE = str(_secret_or_env("DEMO_MODE", "true")).lower() in {"1", "true", "yes", "on"}

@@ -1,4 +1,5 @@
 import streamlit as st
+from config import DEMO_MODE
 
 
 def render_sidebar():
@@ -11,8 +12,10 @@ def render_sidebar():
         )
 
         st.title("Data Center AI")
-
         st.caption("Enterprise Operations Copilot")
+
+        if DEMO_MODE:
+            st.info("Portfolio Demo Mode • Sample data")
 
         st.divider()
 
@@ -36,7 +39,7 @@ def render_sidebar():
             - Unity Catalog
             - SQL Warehouse
             - Streamlit
-            - Gemini 3.6 Flash
+            - Gemini 3.8 Flash
         """)
 
         return clear_chat, generate_report

@@ -1,53 +1,24 @@
-# AI-Powered Data Center Analytics Chatbot
+# Data Center AI Copilot
 
-An intelligent data analytics application built with Streamlit and Google Gemini that converts natural language questions into SQL queries and provides business insights.
+Streamlit AI Copilot for natural-language data-center operations analysis.
 
-## Features
+## Public portfolio deployment
 
-- Natural language to SQL
-- SQL validation
-- Automatic SQL execution
-- AI-generated business insights
-- Interactive Streamlit UI
-- Supports analytical queries
+The public demo runs in **Demo Mode** using a small local SQLite dataset derived from the project's telemetry data. This keeps the portfolio demo independent of an Azure subscription while preserving the production architecture.
 
-## Tech Stack
+Set these Streamlit secrets:
 
-- Python
-- Streamlit
-- Google Gemini API
-- SQLAlchemy
-- Pandas
-- Plotly
+```toml
+GEMINI_API_KEY = "your-key"
+DEMO_MODE = "true"
+```
 
-## Installation
+For a live Azure/Databricks deployment, set `DEMO_MODE = "false"` and provide the three Databricks credentials.
+
+## Run locally
 
 ```bash
-git clone https://github.com/yourusername/DataCenter-GenAI.git
-
-cd DataCenter-GenAI
-
+cd DataCenter_AI
 pip install -r requirements.txt
-
-streamlit run main.py
+streamlit run app.py
 ```
-
-## Environment Variables
-
-Create a `.env` file:
-
-```
-GEMINI_API_KEY=YOUR_API_KEY
-```
-
-# Architecture
-
-![Architecture](assets/architecture/solution_architecture.png)
-
-# Power BI Dashboard
-
-![Dashboard](assets/dashboard/executive_dashboard.png)
-
-## Author
-
-Saumya Taneja
