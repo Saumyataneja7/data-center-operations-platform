@@ -1,4 +1,4 @@
-from main import run
+from DataCenter_AI.main import run
 
 if __name__ == "__main__":
     run()
