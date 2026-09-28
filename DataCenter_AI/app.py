@@ -3,6 +3,6 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
-from DataCenter_AI.main import run
+from main import run
 
 run()
