@@ -10,24 +10,29 @@ def generate_sql(question):
 
     sql = ask_gemini(prompt)
 
+    print("========== GEMINI RAW RESPONSE ==========")
+    print(repr(sql))
+    print("=========================================")
+
     # Remove markdown fences
     sql = sql.replace("```sql", "")
     sql = sql.replace("```SQL", "")
     sql = sql.replace("```", "")
     sql = sql.strip()
 
-    # Remove accidental explanatory text before the SQL
+    # Find the beginning of the SQL statement
     select_pos = sql.upper().find("SELECT")
     with_pos = sql.upper().find("WITH")
 
     positions = [p for p in (select_pos, with_pos) if p >= 0]
 
     if not positions:
-        raise Exception("Gemini did not return a valid SQL query.")
+        raise Exception(
+            f"Gemini returned an unexpected response: {repr(sql[:500])}"
+        )
 
     sql = sql[min(positions):].strip()
 
-    # Validate before execution
     validate_sql(sql)
 
     return sql
