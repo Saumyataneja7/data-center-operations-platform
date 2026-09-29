@@ -342,9 +342,9 @@ streamlit run app.py
 
 # 🌐 Live Demo
 
-🔗 **Azure App Service**
+🔗 **Streamlit App Deployment**
 
-> [https://YOUR-APP.azurewebsites.net](https://datacenter-ai-copilot-frazc6czcpfma9ha.centralindia-01.azurewebsites.net/)
+> [https://YOUR-APP.azurewebsites.net](https://datacenter-ai-copilot.streamlit.app)
 
 ---
 
