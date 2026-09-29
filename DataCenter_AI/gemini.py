@@ -1,5 +1,7 @@
 import time
+
 from google import genai
+from google.genai import errors
 
 from config import GEMINI_API_KEY
 
@@ -10,6 +12,7 @@ client = genai.Client(api_key=GEMINI_API_KEY)
 
 
 def ask_gemini(prompt: str):
+
     max_attempts = 3
 
     for attempt in range(max_attempts):
@@ -18,13 +21,15 @@ def ask_gemini(prompt: str):
                 model="gemini-3.8-flash",
                 contents=prompt,
             )
+
             return response.text
 
-        except Exception as e:
+        except errors.ServerError as e:
+
             if attempt == max_attempts - 1:
-                return (
-                    "The AI service is temporarily unavailable. "
+                raise RuntimeError(
+                    "Gemini is temporarily unavailable (503). "
                     "Please try again in a moment."
-                )
+                ) from e
 
             time.sleep(2 ** attempt)
