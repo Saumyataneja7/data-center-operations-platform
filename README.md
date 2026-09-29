@@ -344,7 +344,7 @@ streamlit run app.py
 
 🔗 **Streamlit App Deployment**
 
-> [https://YOUR-APP.azurewebsites.net](https://datacenter-ai-copilot.streamlit.app)
+> [Data Center AI Copilot](https://datacenter-ai-copilot.streamlit.app)
 
 ---
 
